@@ -1,23 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
+/** @format */
 
 function App() {
+  const clickHandler = async () => {
+    try {
+      console.log("Entered into the controller");
+
+      const response = await fetch("http://localhost:4000/testroute", {
+        method: "POST",
+        body: JSON.stringify({ msg: "Say Hi to Pankaj !!!" }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "include",
+      });
+
+      if (response.ok) {
+        console.log("Successfully fetched the data ...");
+        console.log("data", await response.json());
+      } else {
+        console.log("Error in fetching the data");
+      }
+
+      console.log("Exiting from the Controller");
+    } catch (err) {
+      console.log(err.message);
+      // console.log(err);
+    }
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button id="btn" onClick={clickHandler}>
+        Fetch data
+      </button>
     </div>
   );
 }
