@@ -5,9 +5,15 @@ function App() {
     try {
       console.log("Entered into the controller");
 
-      const response = await fetch("http://localhost:4000/testroute", {
+      const response = await fetch("http://localhost:5000/api/v1/signup", {
         method: "POST",
-        body: JSON.stringify({ msg: "Say Hi to Pankaj !!!" }),
+        body: JSON.stringify({
+          firstname: "mayank",
+          lastname: "padhma",
+          gender: "M",
+          email: "yna@gmail.com",
+          upassword: "test123",
+        }),
         headers: {
           "Content-Type": "application/json",
         },
