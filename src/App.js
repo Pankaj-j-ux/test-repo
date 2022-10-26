@@ -5,13 +5,13 @@ function App() {
     try {
       console.log("Entered into the controller");
 
-      const response = await fetch("http://localhost:5000/api/v1/signup", {
+      const response = await fetch("http://localhost:5000/api/v1/login", {
         method: "POST",
         body: JSON.stringify({
           firstname: "mayank",
           lastname: "padhma",
           gender: "M",
-          email: "yna@gmail.com",
+          email: "@gmail.com",
           upassword: "test123",
         }),
         headers: {
