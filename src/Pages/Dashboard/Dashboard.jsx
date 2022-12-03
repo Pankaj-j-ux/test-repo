@@ -10,6 +10,7 @@ import GroupExpand from "../../Components/GroupExpand";
 import CreateGroupCard from "../../Components/CreateGroupCard";
 
 const Dashboard = () => {
+  const [openCreateGroup, setOpenCreateGroup] = useState(false);
   const [groupData, setGroupData] = useState([]);
   const [groupNum, setGroupNum] = useState();
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Dashboard = () => {
       const result = await response.json();
       // console.log(result);
 
-      setGroupData(result.groups);
+      setGroupData(result.groups.reverse());
 
       if (!result.success) {
         navigate("/auth");
@@ -45,11 +46,20 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
-        <CreateGroupCard />
+        {openCreateGroup && (
+          <CreateGroupCard
+            setOpenCreateGroup={setOpenCreateGroup}
+            setGroupData={setGroupData}
+          />
+        )}
         <Header />
         <div className="dashboard-body">
-          <Sidebar groupData={groupData} changeGroupNum={changeGroupNum} />
-          <GroupExpand groupNum={groupNum} />
+          <Sidebar
+            setOpenCreateGroup={setOpenCreateGroup}
+            groupData={groupData}
+            changeGroupNum={changeGroupNum}
+          />
+          <GroupExpand />
         </div>
       </div>
     </>

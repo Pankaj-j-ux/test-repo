@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Dashboard />}>
-          <Route path="dashboard/:id" element={<GroupExpand />} />
+          <Route path="dashboard/:gid" element={<GroupExpand />} />
         </Route>
         <Route path="/auth" element={<Auth />} />
       </Routes>

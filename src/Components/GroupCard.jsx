@@ -16,10 +16,11 @@ const color = generateRandomColor();
 const GroupCard = ({ gid, gname, createdat, changeGroupNum }) => {
   const letter = gname.charAt(0).toUpperCase();
   createdat = new Date(createdat).toDateString();
+
   return (
     <NavLink to={`dashboard/${gid}`} onClick={() => changeGroupNum(gid)}>
       <div className="groupcard">
-        <div className="card-img" style={{ backgroundColor: color }}>
+        <div className="card-img" style={{ backgroundColor: "olive" }}>
           {letter}
         </div>
         <div className="card-body">
