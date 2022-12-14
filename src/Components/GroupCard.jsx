@@ -13,20 +13,28 @@ function generateRandomColor() {
 
 const color = generateRandomColor();
 
-const GroupCard = ({ gid, gname, createdat, changeGroupNum }) => {
+const GroupCard = ({ gid, gname, createdat, isExtendedSidebar }) => {
   const letter = gname.charAt(0).toUpperCase();
   createdat = new Date(createdat).toDateString();
 
   return (
-    <NavLink to={`dashboard/${gid}`} onClick={() => changeGroupNum(gid)}>
+    <NavLink to={`dashboard/${gid}`}>
       <div className="groupcard">
-        <div className="card-img" style={{ backgroundColor: "olive" }}>
+        <div
+          className="card-img"
+          style={{ backgroundColor: "rgba(18, 84, 160, 0.3)" }}
+        >
           {letter}
         </div>
-        <div className="card-body">
-          <div className="card-title">{gname}</div>
-          <div className="card-date">{createdat}</div>
-        </div>
+        {isExtendedSidebar && (
+          <div
+            // className={isExtendedSidebar ? "card-body" : "card-body-transition"}
+            className="card-body"
+          >
+            <div className="card-title">{gname}</div>
+            <div className="card-date">{createdat}</div>
+          </div>
+        )}
       </div>
     </NavLink>
   );

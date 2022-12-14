@@ -6,9 +6,13 @@ import loginImg1 from "../../Assets/Images/login-img1.png";
 import { useNavigate } from "react-router-dom";
 
 import "./Auth.css";
+import { useEffect } from "react";
 // import { useRef } from "react";
+import Loading from "../Landing/Loading";
 
 const Auth = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
   const navigate = useNavigate();
   // const clearRef = useRef();
   const [isSignUp, setSignUp] = useState(false);
@@ -22,6 +26,10 @@ const Auth = () => {
   });
 
   const [confirmPass, setConfirmPass] = useState(true);
+
+  useEffect(() => {
+    setIsLoading(false);
+  }, []);
 
   const changeHandler = (e) => {
     setData((pre) => {
@@ -60,7 +68,7 @@ const Auth = () => {
 
     const { firstname, lastname, email, upassword, cpassword, gender } = data;
     if (isSignUp) {
-      console.log(data);
+      // console.log(data);
       if (
         firstname &&
         lastname &&
@@ -95,7 +103,7 @@ const Auth = () => {
         alert("Please Fill in the Details completely");
       }
     } else {
-      console.log(data);
+      // console.log(data);
 
       if (email && upassword) {
         const response = await fetch("http://localhost:5000/api/v1/login", {
@@ -125,7 +133,9 @@ const Auth = () => {
     }
   };
 
-  return (
+  return isLoading ? (
+    <Loading />
+  ) : (
     <>
       <div className="auth">
         <div className="part2">
@@ -279,7 +289,7 @@ const Auth = () => {
               </div>
             )}
           </div>
-          <img src={loginImg1} alt="login-img1" />
+          {/* <img src={loginImg1} alt="login-img1" /> */}
         </div>
       </div>
     </>

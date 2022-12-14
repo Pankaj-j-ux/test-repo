@@ -1,19 +1,38 @@
 /** @format */
 
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "./Dashboard.css";
 
 import Header from "../../Components/Header";
 import Sidebar from "../../Components/Sidebar";
 import GroupExpand from "../../Components/GroupExpand";
 import CreateGroupCard from "../../Components/CreateGroupCard";
+import Loading from "../Landing/Loading";
+import Dropdown1 from "../../Components/Dropdown1";
 
 const Dashboard = () => {
+  const [groupData, setGroupData] = useState(null);
+  const [profileData, setProfileData] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  // const [profileAlert, setProfileAlert] = useState(true);
   const [openCreateGroup, setOpenCreateGroup] = useState(false);
-  const [groupData, setGroupData] = useState([]);
-  const [groupNum, setGroupNum] = useState();
+
+  const [isExtendedSidebar, setIsExtendedSidebar] = useState(true);
+
   const navigate = useNavigate();
+
+  const [isOpen, setOpen] = useState(false);
+  const [isOverProfile, setOverProfile] = useState(false);
+  const [isOverList, setOverList] = useState(false);
+
+  useEffect(() => {
+    if (isOverList || isOverProfile) {
+      setOpen(true);
+    } else {
+      setOpen(false);
+    }
+  }, [isOverList, isOverProfile]);
 
   useEffect(() => {
     async function fetchData() {
@@ -28,38 +47,66 @@ const Dashboard = () => {
       });
 
       const result = await response.json();
-      // console.log(result);
-
-      setGroupData(result.groups.reverse());
 
       if (!result.success) {
-        navigate("/auth");
+        setIsLoading(false);
+        setGroupData(null);
+        setProfileData(null);
+      } else {
+        setIsLoading(false);
+        setGroupData(result.groups.reverse());
+        setProfileData(result.user);
       }
     }
     fetchData();
   }, []);
 
-  const changeGroupNum = (num) => {
-    setGroupNum(num);
-  };
+  if (isLoading && !groupData) {
+    return <Loading />;
+  }
+
+  if (!groupData && !isLoading) {
+    navigate("/auth");
+  }
+
+  // if (profileData.photo && profileData.contact) {
+  //   setProfileAlert(false);
+  // }
 
   return (
     <>
       <div className="dashboard">
+        {isOpen && <Dropdown1 setOverList={setOverList} />}
+
         {openCreateGroup && (
           <CreateGroupCard
             setOpenCreateGroup={setOpenCreateGroup}
             setGroupData={setGroupData}
           />
         )}
-        <Header />
+
+        {/* {!(profileData.photo1 && profileData.contact) && (
+          <div className="banner">
+            <p>Complete Your Profile first</p>
+          </div>
+        )} */}
+        <Header
+          profileData={profileData}
+          setIsExtendedSidebar={setIsExtendedSidebar}
+          setOverProfile={setOverProfile}
+        />
         <div className="dashboard-body">
           <Sidebar
+            profileData={profileData}
+            isExtendedSidebar={isExtendedSidebar}
             setOpenCreateGroup={setOpenCreateGroup}
             groupData={groupData}
-            changeGroupNum={changeGroupNum}
           />
-          <GroupExpand />
+          <GroupExpand
+            isExtendedSidebar={isExtendedSidebar}
+            profileData={profileData}
+            groupData={groupData}
+          />
         </div>
       </div>
     </>

@@ -2,16 +2,30 @@
 
 import GroupCard from "./GroupCard";
 
-const Sidebar = ({ groupData, changeGroupNum, setOpenCreateGroup }) => {
+const Sidebar = ({
+  groupData,
+  setOpenCreateGroup,
+  isExtendedSidebar,
+  profileData,
+}) => {
   return (
     <>
-      <div className="sidebar">
+      <div
+        className="sidebar"
+        style={{
+          width: isExtendedSidebar ? "280px" : "80px",
+          // height: !(profileData.photo1 && profileData.contact)
+          //   ? "86.5vh"
+          //   : "90.1vh",
+        }}
+      >
         <div className="deign1">
           <button
             className="addgroup-btn"
             onClick={() => setOpenCreateGroup(true)}
           >
-            <span> CREATE NEW GROUP </span> <span> +</span>
+            {isExtendedSidebar && <span className=""> CREATE NEW GROUP </span>}
+            <span className="addgroupclass"> +</span>
           </button>
         </div>
         <div className="groups">
@@ -22,7 +36,7 @@ const Sidebar = ({ groupData, changeGroupNum, setOpenCreateGroup }) => {
                 gid={obj.id}
                 gname={obj.gname}
                 createdat={obj.Created_at}
-                changeGroupNum={changeGroupNum}
+                isExtendedSidebar={isExtendedSidebar}
               />
             );
           })}
