@@ -10,13 +10,15 @@ import GroupExpand from "../../Components/GroupExpand";
 import CreateGroupCard from "../../Components/CreateGroupCard";
 import Loading from "../Landing/Loading";
 import Dropdown1 from "../../Components/Dropdown1";
+import ProfileUpdateBox from "../../Components/ProfileUpdateBox";
 
 const Dashboard = () => {
   const [groupData, setGroupData] = useState(null);
   const [profileData, setProfileData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  // const [profileAlert, setProfileAlert] = useState(true);
+  const [profileAlert, setProfileAlert] = useState(false);
   const [openCreateGroup, setOpenCreateGroup] = useState(false);
+  // const [openProfileUpdate, setProfileUpdate] = useState();
 
   const [isExtendedSidebar, setIsExtendedSidebar] = useState(true);
 
@@ -36,15 +38,18 @@ const Dashboard = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const response = await fetch("http://localhost:5000/api/v1/dashboard", {
-        method: "GET",
-        mode: "cors",
-        cache: "no-cache",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const response = await fetch(
+        "https://bill-splitter-backend.vercel.app/api/v1/dashboard",
+        {
+          method: "GET",
+          mode: "cors",
+          cache: "no-cache",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       const result = await response.json();
 
@@ -53,9 +58,14 @@ const Dashboard = () => {
         setGroupData(null);
         setProfileData(null);
       } else {
+        console.log("phle");
         setIsLoading(false);
+        console.log("phle1");
         setGroupData(result.groups.reverse());
+        console.log("phle2");
         setProfileData(result.user);
+        console.log("phle3");
+        console.log(result.user);
       }
     }
     fetchData();
@@ -76,6 +86,12 @@ const Dashboard = () => {
   return (
     <>
       <div className="dashboard">
+        {profileAlert && (
+          <ProfileUpdateBox
+            setProfileAlert={setProfileAlert}
+            profileData={profileData}
+          />
+        )}
         {isOpen && <Dropdown1 setOverList={setOverList} />}
 
         {openCreateGroup && (

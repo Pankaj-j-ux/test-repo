@@ -2,25 +2,28 @@
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGear } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Dropdown1 = ({ setOverList }) => {
+  const navigate = useNavigate();
+
   const logoutHandler = async () => {
-    const response = await fetch("http://localhost:5000/api/v1/logout", {
-      mode: "cors",
-      cache: "no-cache",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://bill-splitter-backend.vercel.app/api/v1/logout",
+      {
+        mode: "cors",
+        cache: "no-cache",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     const result = await response.json();
     if (result.success) {
-      // console.log("yeahh!!");
-      window.location.reload();
+      navigate("/auth");
     } else {
-      // console.log("shit!!");
     }
   };
   return (

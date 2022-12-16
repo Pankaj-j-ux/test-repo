@@ -105,7 +105,11 @@
   width: 100%;
   padding-bottom: 10px;
   border-bottom: rgb(10, 10, 10, 0.6) solid 1px;
+}
+
+.dropdown > li > a {
   cursor: pointer;
+  width: 200px;
 }
 
 .logout-btn {
@@ -320,7 +324,8 @@
 
 /* CREATE NEW GROUP CARD  */
 
-.creategroup_card {
+.creategroup_card,
+.profileupdatebox {
   position: absolute;
 
   display: flex;
@@ -1066,6 +1071,55 @@
   animation: rotation1 1s infinite linear;
 }
 
+.profileupdatebox > .innerbody {
+  /* height: 500px; */
+  width: 500px;
+
+  /* min-width: 350px; */
+  /* min-height: 400px; */
+
+  background-color: white;
+
+  border-radius: 22px;
+  padding: 30px;
+
+  position: relative;
+
+  text-align: center;
+}
+
+.profileupdatebox > .innerbody > p:nth-child(1) {
+  font-size: 38px;
+  font-weight: 900;
+}
+
+.profileupdatebox > .innerbody > p:nth-child(2) {
+  font-size: 18px;
+  font-weight: 900;
+  color: rgb(175, 40, 40);
+  margin-bottom: 20px;
+}
+
+.profileupdatebox > .innerbody > p:nth-child(3) {
+  font-size: 18px;
+  font-weight: 900;
+  color: green;
+}
+
+.profileupdatebox > .innerbody > button {
+  margin: 0;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 2px;
+  background-color: #0d315a;
+  color: white;
+  width: 150px;
+}
+
+.profileupdatebox > .innerbody > p:nth-child(5) {
+  cursor: pointer;
+  color: #616468;
+}
 @keyframes rotation1 {
   from {
     transform: rotate(0deg);

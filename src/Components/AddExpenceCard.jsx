@@ -42,7 +42,7 @@ const AddExpenceCard = ({
 
   const submitHandler = async () => {
     const response = await fetch(
-      `http://localhost:5000/api/v1/addexpense/${gid}`,
+      `https://bill-splitter-backend.vercel.app/api/v1/addexpense/${gid}`,
       {
         credentials: "include",
         method: "POST",
