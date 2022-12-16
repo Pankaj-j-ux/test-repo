@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/billl-splitter-frontend/static/css/main.e515c44c.css",
+    "main.js": "/billl-splitter-frontend/static/js/main.b0f1b72c.js",
+    "static/media/login-img2.png": "/billl-splitter-frontend/static/media/login-img2.f98a1c357a2bfbf0616f.png",
+    "static/media/bg6.jpg": "/billl-splitter-frontend/static/media/bg6.eea2e6dca1fa59394d86.jpg",
+    "static/media/login-img1.png": "/billl-splitter-frontend/static/media/login-img1.d2d60af2fde36b52246e.png",
+    "static/media/1492.gif": "/billl-splitter-frontend/static/media/1492.6931027664fccb13572b.gif",
+    "index.html": "/billl-splitter-frontend/index.html",
+    "main.e515c44c.css.map": "/billl-splitter-frontend/static/css/main.e515c44c.css.map",
+    "main.b0f1b72c.js.map": "/billl-splitter-frontend/static/js/main.b0f1b72c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e515c44c.css",
+    "static/js/main.b0f1b72c.js"
+  ]
+}
